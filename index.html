@@ -977,28 +977,78 @@
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.776156912573!2d77.05835493390518!3d10.828434879735946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba84ee37569ae7f%3A0x3c5b1824b6e79192!2sSri%20Eshwar%20College%20of%20Engineering%2C%20Coimbatore!5e0!3m2!1sen!2sin!4v1702463056856!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
 
-        <section class="contact-form">
+        <form id="form">
+    <div class="field">
+      <label for="name">name</label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div class="field">
+      <label for="email">email</label>
+      <input type="text" name="email" id="email">
+    </div>
+    <div class="field">
+      <label for="message">message</label>
+      <input type="text" name="message" id="message">
+    </div>
+  
+    <input type="submit" id="button" value="Send Email" >
+  </form>
+  
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  
+  <script type="text/javascript">
+    emailjs.init('L3St-0yzL8CU0Qay3')
+  </script>
+  <script>
+    const btn = document.getElementById('button');
 
-          <h3 class="h3 form-title">Contact Form</h3>
+document.getElementById('form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
 
-          <form action="#" class="form" data-form>
+   btn.value = 'Sending...';
 
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+   const serviceID = 'default_service';
+   const templateID = 'template_ypc4tsj';
 
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('Sent!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+  </script>
+  <style>
+    .field {
+  margin-bottom: 10px;
+}
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+.field label {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
+.field input {
+  display: block;
+  min-width: 250px;
+  line-height: 1.5;
+  font-size: 14px;
+}
 
-          </form>
-
-        </section>
+input[type="submit"] {
+  display: block;
+  padding: 6px 30px;
+  font-size: 14px;
+  background-color: #4460AA;
+  color: #fff;
+  border: none
+}
+  </style>
 
       </article>
 
